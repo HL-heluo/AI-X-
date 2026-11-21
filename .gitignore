@@ -1,0 +1,37 @@
+# Local configuration and credentials
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.keystore
+*.jks
+*.p12
+*.pfx
+secrets/
+
+# Local services, test data and generated output
+.chain-demo/
+.venv/
+node_modules/
+__pycache__/
+.dart_tool/
+.pytest_cache/
+*.db
+*.db-wal
+*.db-shm
+*.sqlite
+*.sqlite3
+*.log
+build/
+dist/
+coverage/
+/_acceptance/
+/_local_oss_check/
+/.dsh-tmp/
+
+# Machine-local development settings
+.idea/
+.vscode/
+local.properties
+key.properties

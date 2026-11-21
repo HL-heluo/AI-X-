@@ -1,0 +1,58 @@
+# Miscellaneous
+*.class
+*.log
+*.pyc
+*.swp
+.DS_Store
+.atom/
+.build/
+.buildlog/
+.history
+.svn/
+.swiftpm/
+migrate_working_dir/
+
+# IntelliJ related
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# The .vscode folder contains launch configuration and tasks you configure in
+# VS Code which you may wish to be included in version control, so this line
+# is commented out by default.
+#.vscode/
+
+# Flutter/Dart/Pub related
+**/doc/api/
+**/ios/Flutter/.last_build_id
+.dart_tool/
+.flutter-plugins-dependencies
+.pub-cache/
+.pub/
+/build/
+/coverage/
+
+# Symbolication related
+app.*.symbols
+
+# Obfuscation related
+app.*.map.json
+
+# Android Studio will place build artifacts here
+/android/app/debug
+/android/app/profile
+/android/app/release
+
+# Kotlin 编译器的增量缓存（`flutter build apk` 会在 android/ 下埋一份）。
+# 【为什么它不是「反正 .gitignore 里 build/ 已经挡住了」】因为它在 **android/.kotlin**，
+# 不是 build/ 下面 —— 是本机构建留下的、和源码无关的中间产物。
+/android/.kotlin/
+
+# Widget Preview related
+.widget_preview/
+
+# 一键打包的产物（scripts/build-web.sh 会往这里丢 40MB 的 zip）。
+# 【为什么必须挡】每次打包都是一个新文件名的 zip，不挡的话仓库会被这些
+# 二进制块撑爆，而且它们和源码没有任何关系 —— 要复现就重跑一遍脚本。
+/dist/

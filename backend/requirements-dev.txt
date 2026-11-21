@@ -1,0 +1,26 @@
+# 开发/测试依赖。**生产环境不要装这个文件。**
+#
+# 装法：`.venv/Scripts/python.exe -m pip install -r requirements-dev.txt`
+# （生产只装 requirements.txt）
+
+# ── 测试框架 ────────────────────────────────────────────────
+pytest==8.3.4
+# 【为什么单独分一个文件而不是全塞进 requirements.txt】
+# 因为生产镜像里出现 pytest 不只是「多几个包」的问题：测试工具链
+# 通常带着 fixture、插件加载机制，以及 `assert` 重写钩子 —— 它们
+# 都是**部署产物里不该有的可执行入口**。用两个文件分开，生产镜像
+# 少装一层，而且「哪些是测试用的」一眼可见。
+
+pytest-asyncio==0.25.0
+# 【为什么必须有它】因为整套契约测试都是 async 的 —— httpx 0.28 起
+# `ASGITransport` 只有异步接口（见 tests/conftest.py）。没有这个插件，
+# pytest 会跳过或被 async 用例搞糊涂，最典型的现象是**测试被静默跳过**，
+# 报告上看着是绿的。
+#
+# 配置见 pytest.ini 的 `asyncio_mode = auto`。
+
+anyio==4.7.0
+# FastAPI/Starlette 的异步测试后端。pytest-asyncio 够用时它是冗余的，
+# 但它在依赖树里反正会被 starlette 拉进来，这里显式钉住版本，
+# 免得哪天它升级把 `anyio_backend` 夹具的语义悄悄改了
+# （会让每条 async 用例在 asyncio + trio 上各跑一遍）。

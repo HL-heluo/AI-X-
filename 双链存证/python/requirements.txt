@@ -1,0 +1,14 @@
+# Python 侧依赖（后端 FastAPI 已经在用 requests/httpx，这里只补指纹相关）
+
+#
+# 系统前置（装包不会替你装）：
+#   · FFmpeg 必须在 PATH 里：ffmpeg -version
+#   · IPFS 侧可选：Kubo 的 ipfs daemon 在 5001 端口
+#
+# 安装：pip install -r requirements.txt
+requests>=2.31,<3
+videohash2==3.2.2
+#
+# videohash2 的传递依赖（了解一下，出问题时好定位）：
+#   ImageHash / Pillow / imagedominantcolour / yt-dlp
+# 其中 Pillow 有 Windows 轮子；yt-dlp 只在用 URL 输入时才真正跑到。

@@ -1,0 +1,14 @@
+{
+  "name": "fabric-gateway-bridge",
+  "version": "1.0.0",
+  "private": true,
+  "description": "把 Fabric Gateway 包成一个本地 HTTP 服务，让 Python 后端能直接调用链码",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "@grpc/grpc-js": "^1.10.0",
+    "@hyperledger/fabric-gateway": "1.13.0"
+  }
+}

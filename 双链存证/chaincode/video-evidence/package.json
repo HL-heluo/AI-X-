@@ -1,0 +1,17 @@
+{
+  "name": "video-evidence",
+  "version": "2.0.0",
+  "description": "视频创作信息存证链码（MVP）：精确哈希 + IPFS CID + 作者/参数/媒体信息，按作者与文件哈希可查",
+  "main": "index.js",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "start": "fabric-chaincode-node start",
+    "test": "node test/local-test.js"
+  },
+  "dependencies": {
+    "fabric-contract-api": "2.5.8",
+    "fabric-shim": "2.5.8"
+  }
+}

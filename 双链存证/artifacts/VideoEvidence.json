@@ -1,0 +1,503 @@
+{
+  "contractName": "VideoEvidence",
+  "source": "VideoEvidence.sol",
+  "solc": "0.8.38+commit.1835d247.Emscripten.clang",
+  "abi": [
+    {
+      "inputs": [],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "inputs": [],
+      "name": "AccessControlBadConfirmation",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "neededRole",
+          "type": "bytes32"
+        }
+      ],
+      "name": "AccessControlUnauthorizedAccount",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "videoIdHash",
+          "type": "bytes32"
+        }
+      ],
+      "name": "AlreadyRecorded",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "InvalidArgument",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "videoIdHash",
+          "type": "bytes32"
+        }
+      ],
+      "name": "NotFound",
+      "type": "error"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "videoIdHash",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "creator",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes32",
+          "name": "sha256",
+          "type": "bytes32"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint64",
+          "name": "perceptualHash",
+          "type": "uint64"
+        },
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "ipfsCid",
+          "type": "string"
+        }
+      ],
+      "name": "EvidenceRecorded",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "role",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "previousAdminRole",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "newAdminRole",
+          "type": "bytes32"
+        }
+      ],
+      "name": "RoleAdminChanged",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "role",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "sender",
+          "type": "address"
+        }
+      ],
+      "name": "RoleGranted",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "role",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "sender",
+          "type": "address"
+        }
+      ],
+      "name": "RoleRevoked",
+      "type": "event"
+    },
+    {
+      "inputs": [],
+      "name": "DEFAULT_ADMIN_ROLE",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "RECORDER_ROLE",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "videoIdHash",
+          "type": "bytes32"
+        }
+      ],
+      "name": "exists",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "videoIdHash",
+          "type": "bytes32"
+        }
+      ],
+      "name": "getEvidence",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "sha256",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "uint64",
+          "name": "perceptualHash",
+          "type": "uint64"
+        },
+        {
+          "internalType": "uint64",
+          "name": "recordedAt",
+          "type": "uint64"
+        },
+        {
+          "internalType": "address",
+          "name": "creator",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "paramsHash",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "string",
+          "name": "ipfsCid",
+          "type": "string"
+        },
+        {
+          "internalType": "address",
+          "name": "recorder",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "role",
+          "type": "bytes32"
+        }
+      ],
+      "name": "getRoleAdmin",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "role",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        }
+      ],
+      "name": "grantRole",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "role",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        }
+      ],
+      "name": "hasRole",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "videoIdHash",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "sha256",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "uint64",
+          "name": "perceptualHash",
+          "type": "uint64"
+        },
+        {
+          "internalType": "string",
+          "name": "ipfsCid",
+          "type": "string"
+        },
+        {
+          "internalType": "address",
+          "name": "creator",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "paramsHash",
+          "type": "bytes32"
+        }
+      ],
+      "name": "recordEvidence",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "role",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "address",
+          "name": "callerConfirmation",
+          "type": "address"
+        }
+      ],
+      "name": "renounceRole",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "role",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        }
+      ],
+      "name": "revokeRole",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes4",
+          "name": "interfaceId",
+          "type": "bytes4"
+        }
+      ],
+      "name": "supportsInterface",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "videoIdHash",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "candidateSha256",
+          "type": "bytes32"
+        }
+      ],
+      "name": "verifyExact",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "matched",
+          "type": "bool"
+        },
+        {
+          "internalType": "uint64",
+          "name": "recordedAt",
+          "type": "uint64"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "videoIdHash",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "uint64",
+          "name": "candidateHash",
+          "type": "uint64"
+        },
+        {
+          "internalType": "uint8",
+          "name": "maxDistance",
+          "type": "uint8"
+        }
+      ],
+      "name": "verifyPerceptual",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "matched",
+          "type": "bool"
+        },
+        {
+          "internalType": "uint8",
+          "name": "distance",
+          "type": "uint8"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "sha256Hash",
+          "type": "bytes32"
+        }
+      ],
+      "name": "videoIdBySha256",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x608060405234801561000f575f5ffd5b5061001a5f3361004b565b506100457ff996da754c790e95d5c7ca3330cfcad529487fe9d1d8edb7afc65076fdf9adb43361004b565b506100f4565b5f828152602081815260408083206001600160a01b038516845290915281205460ff166100eb575f838152602081815260408083206001600160a01b03861684529091529020805460ff191660011790556100a33390565b6001600160a01b0316826001600160a01b0316847f2f8788117e7eff1d82e926ec794901d17c78024a50270940304540a733656f0d60405160405180910390a45060016100ee565b505f5b92915050565b610dba806101015f395ff3fe608060405234801561000f575f5ffd5b50600436106100e5575f3560e01c80638df6461911610088578063bea8658111610063578063bea8658114610208578063d547741f1461022f578063f5c73e0814610242578063fd8dfc1114610274575f5ffd5b80638df64619146101db57806391d14854146101ee578063a217fddf14610201575f5ffd5b806336568abe116100c357806336568abe1461015657806338a699a4146101695780634a7221a0146101965780634b52ac46146101bc575f5ffd5b806301ffc9a7146100e9578063248a9ca3146101115780632f2ff15d14610141575b5f5ffd5b6100fc6100f7366004610971565b6102a0565b60405190151581526020015b60405180910390f35b61013361011f36600461099f565b5f9081526020819052604090206001015490565b604051908152602001610108565b61015461014f3660046109cc565b6102d6565b005b6101546101643660046109cc565b610300565b6100fc61017736600461099f565b5f908152600160205260409020600201546001600160a01b0316151590565b6101a96101a436600461099f565b610338565b60405161010897969594939291906109f6565b6101336101ca36600461099f565b5f9081526002602052604090205490565b6101546101e9366004610aad565b610468565b6100fc6101fc3660046109cc565b6106db565b6101335f81565b6101337ff996da754c790e95d5c7ca3330cfcad529487fe9d1d8edb7afc65076fdf9adb481565b61015461023d3660046109cc565b610703565b610255610250366004610b58565b610727565b6040805192151583526001600160401b03909116602083015201610108565b610287610282366004610b78565b610787565b60408051921515835260ff909116602083015201610108565b5f6001600160e01b03198216637965db0b60e01b14806102d057506301ffc9a760e01b6001600160e01b03198316145b92915050565b5f828152602081905260409020600101546102f0816107f5565b6102fa8383610802565b50505050565b6001600160a01b03811633146103295760405163334bd91960e11b815260040160405180910390fd5b6103338282610891565b505050565b5f8181526001602052604081206002810154829182918291829160609183916001600160a01b031661038557604051632d24044b60e11b8152600481018a90526024015b60405180910390fd5b805460018201546002830154600384015460058501546004860180546001600160401b0380871696600160401b900416946001600160a01b039081169493169082906103d090610bba565b80601f01602080910402602001604051908101604052809291908181526020018280546103fc90610bba565b80156104475780601f1061041e57610100808354040283529160200191610447565b820191905f5260205f20905b81548152906001019060200180831161042a57829003601f168201915b50505050509150975097509750975097509750975050919395979092949650565b7ff996da754c790e95d5c7ca3330cfcad529487fe9d1d8edb7afc65076fdf9adb4610492816107f5565b87158061049d575086155b806104af57506001600160a01b038316155b156104cd5760405163a9cb9e0d60e01b815260040160405180910390fd5b60808411156104ef5760405163a9cb9e0d60e01b815260040160405180910390fd5b5f888152600160205260409020600201546001600160a01b03161561052957604051622d326160e51b81526004810189905260240161037c565b6040518060e00160405280888152602001876001600160401b03168152602001426001600160401b03168152602001846001600160a01b0316815260200183815260200186868080601f0160208091040260200160405190810160405280939291908181526020018383808284375f920182905250938552505033602093840152508a8152600180835260409182902084518155928401519083018054928501516001600160401b03908116600160401b026fffffffffffffffffffffffffffffffff1990941692169190911791909117905560608201516002820180546001600160a01b03929092166001600160a01b03199092169190911790556080820151600382015560a082015160048201906106439082610c5c565b5060c09190910151600590910180546001600160a01b0319166001600160a01b039283161790556040519084169089907fc1a3c0180be91c9de2111dc1dcd0ac7d77ff1a8c68bfe18346f9a931ab50c0a2906106a6908b908b908b908b90610d1a565b60405180910390a35f878152600260205260409020546106d1575f8781526002602052604090208890555b5050505050505050565b5f918252602082815260408084206001600160a01b0393909316845291905290205460ff1690565b5f8281526020819052604090206001015461071d816107f5565b6102fa8383610891565b5f82815260016020526040812060028101548291906001600160a01b031661076557604051632d24044b60e11b81526004810186905260240161037c565b8054600190910154931494600160401b9093046001600160401b031693505050565b5f83815260016020526040812060028101548291906001600160a01b03166107c557604051632d24044b60e11b81526004810187905260240161037c565b60018101546107de906001600160401b031686186108fa565b91508360ff168260ff161115925050935093915050565b6107ff8133610934565b50565b5f61080d83836106db565b61088a575f838152602081815260408083206001600160a01b03861684529091529020805460ff191660011790556108423390565b6001600160a01b0316826001600160a01b0316847f2f8788117e7eff1d82e926ec794901d17c78024a50270940304540a733656f0d60405160405180910390a45060016102d0565b505f6102d0565b5f61089c83836106db565b1561088a575f838152602081815260408083206001600160a01b0386168085529252808320805460ff1916905551339286917ff6391f5c32d9c69d2a47ea670b442974b53935d1edc7fd64eb21e047a839171b9190a45060016102d0565b5f5b6001600160401b0382161561092f576109186001831682610d5f565b90506001826001600160401b0316901c91506108fc565b919050565b61093e82826106db565b61096d5760405163e2517d3f60e01b81526001600160a01b03821660048201526024810183905260440161037c565b5050565b5f60208284031215610981575f5ffd5b81356001600160e01b031981168114610998575f5ffd5b9392505050565b5f602082840312156109af575f5ffd5b5035919050565b80356001600160a01b038116811461092f575f5ffd5b5f5f604083850312156109dd575f5ffd5b823591506109ed602084016109b6565b90509250929050565b8781526001600160401b03871660208201526001600160401b038616604082015260018060a01b038516606082015283608082015260e060a08201525f83518060e08401525f5b81811015610a5b576020818701810151610100868401015201610a3d565b505f6101008285010152610100601f19601f830116840101915050610a8b60c08301846001600160a01b03169052565b98975050505050505050565b80356001600160401b038116811461092f575f5ffd5b5f5f5f5f5f5f5f60c0888a031215610ac3575f5ffd5b8735965060208801359550610ada60408901610a97565b945060608801356001600160401b03811115610af4575f5ffd5b8801601f81018a13610b04575f5ffd5b80356001600160401b03811115610b19575f5ffd5b8a6020828401011115610b2a575f5ffd5b60209190910194509250610b40608089016109b6565b96999598509396929591949193505060a09091013590565b5f5f60408385031215610b69575f5ffd5b50508035926020909101359150565b5f5f5f60608486031215610b8a575f5ffd5b83359250610b9a60208501610a97565b9150604084013560ff81168114610baf575f5ffd5b809150509250925092565b600181811c90821680610bce57607f821691505b602082108103610bec57634e487b7160e01b5f52602260045260245ffd5b50919050565b634e487b7160e01b5f52604160045260245ffd5b601f821115610333578282111561033357805f5260205f20601f840160051c6020851015610c3157505f5b90810190601f840160051c035f5b81811015610c54575f83820155600101610c3f565b505050505050565b81516001600160401b03811115610c7557610c75610bf2565b610c8981610c838454610bba565b84610c06565b6020601f821160018114610cbb575f8315610ca45750848201515b5f19600385901b1c1916600184901b178455610d13565b5f84815260208120601f198516915b82811015610cea5787850151825560209485019460019092019101610cca565b5084821015610d0757868401515f19600387901b60f8161c191681555b505060018360011b0184555b5050505050565b8481526001600160401b038416602082015260606040820152816060820152818360808301375f818301608090810191909152601f909201601f191601019392505050565b60ff81811683821601908111156102d057634e487b7160e01b5f52601160045260245ffdfea2646970667358221220c76f5ca4ae8c83cbfa64a06ead31b54638795cfbdf0a4f8e95b06c105fc86a6864736f6c63430008260033"
+}
